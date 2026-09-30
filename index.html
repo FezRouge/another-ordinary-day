@@ -1,1 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3ecd9">
 
+<title>Another Ordinary Day</title>
+
+<style>
+:root {
+  --paper: #f3ecd9;
+  --ink: #171512;
+  --rule: #312d26;
+  --field: #faf6e9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding:
+    max(12px, env(safe-area-inset-top))
+    10px
+    max(20px, env(safe-area-inset-bottom));
+}
+
+.frame {
+  border: 2px solid var(--ink);
+  padding: 5px;
+}
+
+.inner {
+  border: 1px solid var(--ink);
+  padding: 30px 18px 40px;
+}
+
+.attention {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: .15em;
+  line-height: 1.55;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 21px 0;
+}
+
+.rule::before,
+.rule::after {
+  content: "";
+  height: 1px;
+  background: var(--rule);
+  flex: 1;
+}
+
+.rule span {
+  font-size: 9px;
+}
+
+.kicker {
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(34px, 10vw, 52px);
+  line-height: .98;
+  letter-spacing: .025em;
+  margin: 9px 0 15px;
+}
+
+.date {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: .065em;
+  line-height: 1.7;
+}
+
+.intro {
+  max-width: 550px;
+  margin: 23px auto 0;
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+section {
+  max-width: 570px;
+  margin: 33px auto 0;
+}
+
+h2 {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: .16em;
+  line-height: 1.4;
+  margin: 0 0 14px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.center {
+  text-align: center;
+}
+
+.offer {
+  line-height: 1.8;
+}
+
+.rsvp {
+  max-width: 570px;
+  margin-top: 32px;
+}
+
+.rsvp h2 {
+  font-size: 15px;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 340px;
+  margin: 20px auto 4px;
+}
+
+.choice {
+  appearance: none;
+  min-height: 56px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: bold 16px Georgia, "Times New Roman", serif;
+  letter-spacing: .12em;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.choice:hover,
+.choice:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.panel {
+  display: none;
+  border-top: 1px solid var(--rule);
+  padding-top: 26px;
+  margin-top: 29px;
+}
+
+.panel.active {
+  display: block;
+}
+
+.field {
+  margin: 19px 0;
+}
+
+label,
+.legend {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 7px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  appearance: none;
+  display: block;
+  width: 100%;
+  font: 16px Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: var(--field);
+  border: 1px solid #5b554a;
+  border-radius: 0;
+  padding: 12px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.checks {
+  display: grid;
+  gap: 13px;
+}
+
+.checks label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: normal;
+  margin: 0;
+}
+
+.checks input {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  margin: 0;
+}
+
+.submit {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  margin: 26px 0 0;
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: bold 14px Georgia, "Times New Roman", serif;
+  letter-spacing: .11em;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+.confirm {
+  text-align: center;
+}
+
+.confirm h3 {
+  font-size: 19px;
+  letter-spacing: .07em;
+  line-height: 1.45;
+}
+
+.change {
+  appearance: none;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  font: 15px Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.error {
+  text-align: center;
+  color: #6d211c;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 600px) {
+  .page {
+    padding: 20px;
+  }
+
+  .inner {
+    padding: 48px 48px 55px;
+  }
+}
+
+@media (max-width: 360px) {
+  .inner {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .attention {
+    font-size: 9px;
+    letter-spacing: .12em;
+  }
+
+  .choices {
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+<div class="frame">
+<div class="inner">
+
+<div class="attention">
+YOUR ATTENTION TO THE ENTIRETY OF THIS NOTICE IS REQUESTED
+</div>
+
+<div class="rule"><span>◆</span></div>
+
+<div class="kicker">In Remembrance of</div>
+
+<h1>ANOTHER<br>ORDINARY DAY</h1>
+
+<div class="date">
+FRIDAY, OCTOBER 30, 2026<br>
+7:30 P.M. – 10:45 P.M.
+</div>
+
+<p class="intro">
+Friends and acquaintances are invited to gather in remembrance of
+<strong>Another Ordinary Day</strong>, whose quiet passing has left us
+with considerably fewer ordinary days than we once imagined we had.
+</p>
+
+<div class="rule"><span>◆</span></div>
+
+
+<section>
+
+<h2>REGARDING THE EVENING</h2>
+
+<p>
+The observances will begin <strong>promptly at 7:30 p.m.</strong>
+with the <strong>Wake for Another Ordinary Day</strong> and continue
+until <strong>10:45 p.m.</strong>
+</p>
+
+<p>
+For a while, we will observe the customs of mourning: quiet conversation,
+food and drink, music, remembrance, and a few words for the deceased.
+Guests will have an opportunity, should they wish, to offer a remembrance
+of <strong>Another Ordinary Day</strong>.
+</p>
+
+<p>
+Then, as the wake draws to a close, the period of formal mourning will
+come to an end. The evening will move outdoors, where what began as a wake
+will become <strong>a celebration of the days we still have</strong>.
+</p>
+
+</section>
+
+
+<section>
+
+<h2>THE AFTERLIFE</h2>
+
+<p>
+There will be an optional afterparty screening of
+<em>Yellow Submarine</em>, with
+<strong>popcorn, snacks, and cozy blankets</strong>,
+from <strong>11:00 p.m. to 12:30 a.m.</strong>
+</p>
+
+<p>
+If needed, there will also be soft places to lay your head until morning.
+</p>
+
+</section>
+
+
+<section class="center">
+
+<h2>ATTIRE</h2>
+
+<p>
+<strong>After Mourning attire is requested.</strong>
+</p>
+
+<p>
+A Halloween interpretation is entirely appropriate.
+</p>
+
+</section>
+
+
+<section class="center">
+
+<h2>ARRIVAL</h2>
+
+<p>
+Guests are asked to arrive at <strong>7:30 p.m.</strong>
+</p>
+
+<p>
+<strong>Not before. Not after.</strong>
+</p>
+
+<p>
+Friends and family are welcome to accompany you.
+There is no need for an exact accounting, but a general headcount
+will help us make suitable provisions for the living.
+</p>
+
+</section>
+
+
+<section class="center">
+
+<h2>FOR THE BEREAVED</h2>
+
+<p>
+In keeping with the customs of a wake, those attending are invited
+to bring something to share:
+</p>
+
+<p class="offer">
+<strong>
+Food or a casserole<br>
+Non-alcoholic drinks<br>
+Alcoholic drinks
+</strong>
+</p>
+
+<p>
+There will be an opportunity to indicate what you intend to bring
+when you RSVP.
+</p>
+
+</section>
+
+
+<section class="center">
+
+<h2>FOR THE DECEASED</h2>
+
+<p>
+We also ask every mourner to bring
+<strong>one ordinary object from an ordinary day</strong>.
+</p>
+
+<p>
+<strong>
+Nothing valuable.<br>
+Nothing extraordinary.
+</strong>
+</p>
+
+<p>
+A receipt. A grocery list. A coffee mug. A pencil. A button.
+A photograph. A ticket stub. A note left on the refrigerator.
+</p>
+
+<p>
+<em>
+Something that belongs to the unremarkable business of being alive.
+</em>
+</p>
+
+<p>
+These objects will be placed with the deceased.
+</p>
+
+</section>
+
+
+<div class="rule"><span>◆</span></div>
+
+
+<section class="rsvp" id="rsvp">
+
+<div id="choice">
+
+<h2>WILL YOU BE ATTENDING THE WAKE?</h2>
+
+<div class="choices">
+
+<button type="button" class="choice" id="yes-button">
+□ YES
+</button>
+
+<button type="button" class="choice" id="no-button">
+□ NO
+</button>
+
+</div>
+
+</div>
+
+
+<!-- YES -->
+
+<form id="yes-form" class="panel" novalidate>
+
+<h2>REGISTER OF MOURNERS</h2>
+
+<div class="field">
+<label for="name">Your name</label>
+<input id="name" type="text" autocomplete="name" required>
+</div>
+
+<div class="field">
+<label for="count">
+How many mourners will be attending?
+</label>
+
+<input
+  id="count"
+  type="number"
+  inputmode="numeric"
+  min="1"
+  max="30"
+  value="1"
+  required
+>
+</div>
+
+<div class="field">
+<label for="miss">
+What aspects of Another Ordinary Day do you miss?
+</label>
+<textarea id="miss"></textarea>
+</div>
+
+<div class="field">
+<label for="back">
+What would you like to have back?
+</label>
+<textarea id="back"></textarea>
+</div>
+
+<div class="field">
+
+<span class="legend">
+What do you plan to bring?
+</span>
+
+<div class="checks">
+
+<label>
+<input type="checkbox" name="bring" value="Food or casserole">
+Food or a casserole
+</label>
+
+<label>
+<input type="checkbox" name="bring" value="Something sweet">
+Something sweet
+</label>
+
+<label>
+<input type="checkbox" name="bring" value="Non-alcoholic drinks">
+Non-alcoholic drinks
+</label>
+
+<label>
+<input type="checkbox" name="bring" value="Alcoholic drinks">
+Alcoholic drinks
+</label>
+
+<label>
+<input type="checkbox" name="bring" value="Other">
+Other
+</label>
+
+<label>
+<input type="checkbox" name="bring" value="Undecided">
+I haven't decided yet
+</label>
+
+</div>
+</div>
+
+<p class="center">
+Please remember to bring
+<strong>one ordinary object from an ordinary day</strong>
+to place with the deceased.
+</p>
+
+<div class="error" id="yes-error" aria-live="polite"></div>
+
+<button class="submit" id="yes-submit" type="submit">
+SUBMIT MY REPLY
+</button>
+
+</form>
+
+
+<!-- NO -->
+
+<form id="no-form" class="panel" novalidate>
+
+<h2>REGRETS</h2>
+
+<p class="center">
+Kindly leave your name so that your regrets may be properly recorded.
+</p>
+
+<div class="field">
+<label for="no-name">Your name</label>
+<input id="no-name" type="text" autocomplete="name" required>
+</div>
+
+<div class="error" id="no-error" aria-live="polite"></div>
+
+<button class="submit" id="no-submit" type="submit">
+SEND MY REGRETS
+</button>
+
+</form>
+
+
+<!-- YES CONFIRMATION -->
+
+<div id="yes-confirm" class="panel confirm" aria-live="polite">
+
+<h3>YOUR ATTENDANCE HAS BEEN RECORDED</h3>
+
+<p>Thank you.</p>
+
+<p>Please arrive at seven-thirty.</p>
+
+<p>
+Bring something for the bereaved.<br>
+Bring something for the deceased.
+</p>
+
+<p>
+<em>
+And, until then, take some notice of the ordinary days that remain.
+</em>
+</p>
+
+<button class="change" type="button">
+Change my response
+</button>
+
+</div>
+
+
+<!-- NO CONFIRMATION -->
+
+<div id="no-confirm" class="panel confirm" aria-live="polite">
+
+<h3>YOUR REGRETS HAVE BEEN RECEIVED</h3>
+
+<p>
+Another Ordinary Day would have understood.
+</p>
+
+<p>
+<em>
+He was accustomed to being overlooked.
+</em>
+</p>
+
+<button class="change" type="button">
+Change my response
+</button>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+</main>
+
+
+<script>
+(function () {
+
+const ENDPOINT =
+"https://script.google.com/macros/s/AKfycbwapF4axD26qRLXmYhQdY4KdtQDk1dcbDNrmmePxCDojgDiDZtJwXDojTkxivsS4mk-6g/exec";
+
+const choice = document.getElementById("choice");
+const yesButton = document.getElementById("yes-button");
+const noButton = document.getElementById("no-button");
+
+const yesForm = document.getElementById("yes-form");
+const noForm = document.getElementById("no-form");
+
+const yesConfirm = document.getElementById("yes-confirm");
+const noConfirm = document.getElementById("no-confirm");
+
+const yesError = document.getElementById("yes-error");
+const noError = document.getElementById("no-error");
+
+const yesSubmit = document.getElementById("yes-submit");
+const noSubmit = document.getElementById("no-submit");
+
+
+function scrollToElement(element) {
+  setTimeout(function () {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }, 50);
+}
+
+
+function hidePanels() {
+  yesForm.classList.remove("active");
+  noForm.classList.remove("active");
+  yesConfirm.classList.remove("active");
+  noConfirm.classList.remove("active");
+}
+
+
+function showPanel(panel) {
+  choice.classList.add("hidden");
+  hidePanels();
+  panel.classList.add("active");
+  scrollToElement(panel);
+}
+
+
+function returnToChoice() {
+  hidePanels();
+  choice.classList.remove("hidden");
+
+  yesError.textContent = "";
+  noError.textContent = "";
+
+  scrollToElement(choice);
+}
+
+
+async function sendRSVP(data) {
+
+  const body = new URLSearchParams(data);
+
+  await fetch(ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type":
+        "application/x-www-form-urlencoded;charset=UTF-8"
+    },
+    body: body.toString()
+  });
+
+}
+
+
+yesButton.addEventListener("click", function () {
+
+  showPanel(yesForm);
+
+  setTimeout(function () {
+    document.getElementById("name").focus();
+  }, 100);
+
+});
+
+
+noButton.addEventListener("click", function () {
+
+  showPanel(noForm);
+
+  setTimeout(function () {
+    document.getElementById("no-name").focus();
+  }, 100);
+
+});
+
+
+yesForm.addEventListener("submit", async function (event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const count =
+    Number(document.getElementById("count").value);
+
+  const miss =
+    document.getElementById("miss").value.trim();
+
+  const back =
+    document.getElementById("back").value.trim();
+
+  const bring =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="bring"]:checked'
+      )
+    )
+    .map(function (item) {
+      return item.value;
+    })
+    .join(", ");
+
+
+  if (!name) {
+    yesError.textContent =
+      "Please enter your name.";
+
+    document.getElementById("name").focus();
+    return;
+  }
+
+
+  if (
+    !Number.isInteger(count) ||
+    count < 1 ||
+    count > 30
+  ) {
+    yesError.textContent =
+      "Please enter a headcount between 1 and 30.";
+
+    document.getElementById("count").focus();
+    return;
+  }
+
+
+  yesError.textContent = "";
+
+  yesSubmit.disabled = true;
+  yesSubmit.textContent = "RECORDING...";
+
+
+  try {
+
+    await sendRSVP({
+      attending: "YES",
+      name: name,
+      count: String(count),
+      miss: miss,
+      back: back,
+      bring: bring
+    });
+
+    yesForm.classList.remove("active");
+    yesConfirm.classList.add("active");
+
+    scrollToElement(yesConfirm);
+
+  } catch (error) {
+
+    yesError.textContent =
+      "Your reply could not be recorded. Please try again.";
+
+  } finally {
+
+    yesSubmit.disabled = false;
+    yesSubmit.textContent = "SUBMIT MY REPLY";
+
+  }
+
+});
+
+
+noForm.addEventListener("submit", async function (event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("no-name").value.trim();
+
+
+  if (!name) {
+
+    noError.textContent =
+      "Please enter your name.";
+
+    document.getElementById("no-name").focus();
+    return;
+  }
+
+
+  noError.textContent = "";
+
+  noSubmit.disabled = true;
+  noSubmit.textContent = "RECORDING...";
+
+
+  try {
+
+    await sendRSVP({
+      attending: "NO",
+      name: name,
+      count: "0",
+      miss: "",
+      back: "",
+      bring: ""
+    });
+
+    noForm.classList.remove("active");
+    noConfirm.classList.add("active");
+
+    scrollToElement(noConfirm);
+
+  } catch (error) {
+
+    noError.textContent =
+      "Your regrets could not be recorded. Please try again.";
+
+  } finally {
+
+    noSubmit.disabled = false;
+    noSubmit.textContent = "SEND MY REGRETS";
+
+  }
+
+});
+
+
+document
+  .querySelectorAll(".change")
+  .forEach(function (button) {
+
+    button.addEventListener(
+      "click",
+      returnToChoice
+    );
+
+  });
+
+})();
+</script>
+
+</body>
+</html>
