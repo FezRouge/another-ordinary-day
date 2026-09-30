@@ -14,11 +14,18 @@
 
 <style>
 
+/* =========================================================
+   ANOTHER ORDINARY DAY
+   Victorian mourning notice
+   ========================================================= */
+
 :root {
   --paper: #eee6d2;
+  --paper-light: #f5efdf;
   --ink: #191714;
-  --soft-ink: #3b3731;
-  --faint-ink: rgba(25,23,20,.30);
+  --soft-ink: #38342e;
+  --faint: #777064;
+  --rule: #26231f;
   --error: #70251f;
 }
 
@@ -28,7 +35,7 @@
 
 html {
   margin: 0;
-  background: #dcd3be;
+  background: #ddd4bf;
   color: var(--ink);
 }
 
@@ -38,9 +45,9 @@ body {
 
   background:
     radial-gradient(
-      ellipse at 50% 18%,
-      rgba(255,255,255,.22),
-      rgba(255,255,255,0) 58%
+      ellipse at center,
+      rgba(255,255,255,.22) 0%,
+      rgba(255,255,255,0) 68%
     ),
     var(--paper);
 
@@ -56,25 +63,32 @@ body {
 }
 
 
-/* =========================================================
-   FUNERAL NOTICE
-   ========================================================= */
+/* ---------------------------------------------------------
+   PAGE
+   --------------------------------------------------------- */
 
 .notice {
   width: 100%;
   max-width: 760px;
+
   margin: 0 auto;
 
   padding:
-    max(11px, env(safe-area-inset-top))
-    9px
-    max(30px, env(safe-area-inset-bottom));
+    max(12px, env(safe-area-inset-top))
+    10px
+    max(24px, env(safe-area-inset-bottom));
 }
+
+
+/* Outside mourning rule */
 
 .outer-frame {
   border: 2px solid var(--ink);
   padding: 5px;
 }
+
+
+/* Inside mourning rule */
 
 .inner-frame {
   position: relative;
@@ -82,21 +96,23 @@ body {
   border: 1px solid var(--ink);
 
   padding:
-    35px
-    18px
-    62px;
+    34px
+    19px
+    45px;
 }
 
 
-/* =========================================================
-   CORNER DETAILS
-   ========================================================= */
+/* ---------------------------------------------------------
+   SMALL CORNER ORNAMENTS
+   --------------------------------------------------------- */
 
 .corner {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  opacity: .85;
+
+  width: 18px;
+  height: 18px;
+
+  opacity: .88;
 }
 
 .corner::before,
@@ -107,13 +123,13 @@ body {
 }
 
 .corner::before {
-  width: 20px;
+  width: 18px;
   height: 1px;
 }
 
 .corner::after {
   width: 1px;
-  height: 20px;
+  height: 18px;
 }
 
 .corner.tl {
@@ -140,14 +156,14 @@ body {
 }
 
 
-/* =========================================================
-   OPENING
-   ========================================================= */
+/* ---------------------------------------------------------
+   TYPOGRAPHY
+   --------------------------------------------------------- */
 
 .attention {
   max-width: 510px;
 
-  margin: 0 auto 28px;
+  margin: 0 auto 22px;
 
   text-align: center;
 
@@ -162,174 +178,38 @@ body {
 }
 
 
-/* Restrained mourning emblem */
+.memorial-mark {
+  text-align: center;
 
-.mourning-emblem {
-  position: relative;
+  margin: 2px auto 17px;
 
-  width: 78px;
-  height: 73px;
-
-  margin:
-    0 auto
-    17px;
+  line-height: 1;
 }
 
 
-/* Urn */
-
-.urn-lid {
-  position: absolute;
-
-  top: 14px;
-  left: 25px;
-
-  width: 28px;
-  height: 4px;
-
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+.memorial-mark .top {
+  font-size: 15px;
+  letter-spacing: .20em;
 }
 
-.urn-neck {
-  position: absolute;
+.memorial-mark .middle {
+  margin: 3px 0;
 
-  top: 19px;
-  left: 31px;
+  font-size: 25px;
 
-  width: 16px;
-  height: 8px;
-
-  border-left: 1px solid var(--ink);
-  border-right: 1px solid var(--ink);
+  line-height: .8;
 }
 
-.urn-body {
-  position: absolute;
-
-  top: 27px;
-  left: 24px;
-
-  width: 30px;
-  height: 26px;
-
-  border: 1px solid var(--ink);
-
-  border-radius:
-    48% 48% 36% 36% /
-    24% 24% 66% 66%;
-}
-
-.urn-foot {
-  position: absolute;
-
-  top: 54px;
-  left: 29px;
-
-  width: 20px;
-  height: 4px;
-
-  border-top: 1px solid var(--ink);
-}
-
-.urn-base {
-  position: absolute;
-
-  top: 59px;
-  left: 23px;
-
-  width: 32px;
-
-  border-top: 1px solid var(--ink);
-}
-
-
-/* Drooping mourning branches */
-
-.branch {
-  position: absolute;
-
-  top: 22px;
-
-  width: 24px;
-  height: 34px;
-
-  border-top: 1px solid var(--ink);
-
-  opacity: .82;
-}
-
-.branch.left {
-  left: 4px;
-
-  border-radius:
-    100% 0 0 0;
-
-  transform: rotate(-16deg);
-}
-
-.branch.right {
-  right: 4px;
-
-  border-radius:
-    0 100% 0 0;
-
-  transform: rotate(16deg);
-}
-
-.branch::before,
-.branch::after {
-  content: "";
-
-  position: absolute;
-
-  width: 13px;
-  height: 20px;
-
-  border-left:
-    1px solid var(--ink);
-
-  border-radius:
-    50%;
-}
-
-.branch.left::before {
-  top: 7px;
-  left: 6px;
-
-  transform:
-    rotate(19deg);
-}
-
-.branch.left::after {
-  top: 13px;
-  left: 13px;
-
-  transform:
-    rotate(28deg);
-}
-
-.branch.right::before {
-  top: 7px;
-  right: 6px;
-
-  transform:
-    rotate(161deg);
-}
-
-.branch.right::after {
-  top: 13px;
-  right: 13px;
-
-  transform:
-    rotate(152deg);
+.memorial-mark .bottom {
+  font-size: 10px;
+  letter-spacing: .3em;
 }
 
 
 .kicker {
-  margin-bottom: 9px;
-
   text-align: center;
+
+  margin-bottom: 8px;
 
   font-size: 15px;
   font-style: italic;
@@ -338,30 +218,22 @@ body {
 }
 
 
-/*
-  Keep the formal name together.
-  Clamp allows it to shrink on narrow phones rather
-  than splitting into two lines.
-*/
-
 h1 {
   margin:
-    8px
+    7px
     auto
-    17px;
+    16px;
 
   text-align: center;
 
-  white-space: nowrap;
-
   font-size:
-    clamp(27px, 8.3vw, 51px);
+    clamp(35px, 10vw, 54px);
 
-  line-height: 1;
+  line-height: .96;
 
   font-weight: 700;
 
-  letter-spacing: .025em;
+  letter-spacing: .035em;
 }
 
 
@@ -371,7 +243,7 @@ h1 {
   font-size: 13px;
   font-weight: 700;
 
-  line-height: 1.85;
+  line-height: 1.8;
 
   letter-spacing: .08em;
 
@@ -380,10 +252,10 @@ h1 {
 
 
 .intro {
-  max-width: 550px;
+  max-width: 545px;
 
   margin:
-    29px
+    25px
     auto
     0;
 
@@ -392,42 +264,13 @@ h1 {
   font-size: 16px;
   font-style: italic;
 
-  line-height: 1.7;
+  line-height: 1.68;
 }
 
 
-/*
-  The deceased's name is intentionally isolated
-  within the introductory notice.
-*/
-
-.memorial-name {
-  display: block;
-
-  margin:
-    15px
-    auto
-    13px;
-
-  white-space: nowrap;
-
-  font-size:
-    clamp(15px, 4.6vw, 19px);
-
-  font-style: normal;
-  font-weight: 700;
-
-  line-height: 1.3;
-
-  letter-spacing: .10em;
-
-  text-transform: uppercase;
-}
-
-
-/* =========================================================
-   ORNAMENTAL DIVIDERS
-   ========================================================= */
+/* ---------------------------------------------------------
+   VICTORIAN DIVIDERS
+   --------------------------------------------------------- */
 
 .ornament {
   display: flex;
@@ -437,10 +280,10 @@ h1 {
   max-width: 570px;
 
   margin:
-    31px
+    25px
     auto;
 
-  gap: 10px;
+  gap: 9px;
 }
 
 .ornament::before,
@@ -451,51 +294,43 @@ h1 {
 
   flex: 1;
 
-  background: var(--ink);
+  background: var(--rule);
 }
 
 .ornament span {
   display: inline-block;
 
-  font-size: 14px;
+  font-size: 13px;
 
   line-height: 1;
+
+  transform: translateY(-1px);
 }
 
+
+/* Major division */
+
 .ornament.major {
-  margin-top: 36px;
-  margin-bottom: 38px;
+  margin-top: 31px;
+  margin-bottom: 31px;
 }
 
 .ornament.major span {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 
-/* =========================================================
-   CONTENT
-   ========================================================= */
+/* ---------------------------------------------------------
+   CONTENT SECTIONS
+   --------------------------------------------------------- */
 
 section {
   max-width: 570px;
 
   margin:
-    46px
+    35px
     auto
     0;
-}
-
-
-.section-mark {
-  width: 42px;
-
-  margin:
-    0
-    auto
-    15px;
-
-  border-top:
-    1px solid var(--ink);
 }
 
 
@@ -503,7 +338,7 @@ h2 {
   margin:
     0
     0
-    17px;
+    15px;
 
   text-align: center;
 
@@ -522,11 +357,11 @@ p {
   margin:
     0
     0
-    15px;
+    14px;
 
   font-size: 16px;
 
-  line-height: 1.7;
+  line-height: 1.68;
 }
 
 
@@ -535,38 +370,39 @@ p {
 }
 
 
-.important {
-  font-weight: 700;
-}
-
-
-.arrival-command {
-  margin-top: 17px;
-
-  font-weight: 700;
-
-  letter-spacing: .035em;
-}
-
-
 .offer {
-  line-height: 1.95;
+  line-height: 1.85;
 }
 
 
-/* =========================================================
+/* Small decorative heading rule */
+
+.section-mark {
+  width: 42px;
+
+  margin:
+    0
+    auto
+    14px;
+
+  border-top:
+    1px solid var(--ink);
+}
+
+
+/* ---------------------------------------------------------
    RSVP
-   ========================================================= */
+   --------------------------------------------------------- */
 
 .rsvp {
   max-width: 570px;
 
-  margin-top: 45px;
+  margin-top: 36px;
 }
 
 
 .rsvp-question {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 
   text-align: center;
 
@@ -582,26 +418,21 @@ p {
 
 
 .response-note {
-  max-width: 470px;
-
   margin:
-    12px
+    9px
     auto
-    22px;
+    19px;
 
   text-align: center;
 
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
+  font-size: 14px;
+  font-style: italic;
 
-  line-height: 1.6;
-
-  letter-spacing: .10em;
-
-  text-transform: uppercase;
+  line-height: 1.55;
 }
 
+
+/* YES / NO */
 
 .choices {
   display: grid;
@@ -610,13 +441,13 @@ p {
     1fr
     1fr;
 
-  gap: 24px;
+  gap: 22px;
 
   width: 100%;
   max-width: 310px;
 
   margin:
-    25px
+    23px
     auto
     4px;
 }
@@ -625,7 +456,7 @@ p {
 .choice {
   appearance: none;
 
-  min-height: 50px;
+  min-height: 49px;
 
   padding: 8px 12px;
 
@@ -660,7 +491,7 @@ p {
   width: 15px;
   height: 15px;
 
-  margin-right: 8px;
+  margin-right: 7px;
 
   vertical-align: -2px;
 
@@ -680,20 +511,20 @@ p {
 }
 
 
-/* =========================================================
-   RSVP PANELS
-   ========================================================= */
+/* ---------------------------------------------------------
+   EXPANDING RSVP PANELS
+   --------------------------------------------------------- */
 
 .panel {
   display: none;
 
-  margin-top: 34px;
+  margin-top: 30px;
 
-  padding-top: 30px;
+  padding-top: 27px;
 
   border-top:
     1px solid
-    var(--ink);
+    var(--rule);
 }
 
 
@@ -703,17 +534,17 @@ p {
 
 
 .register-title {
-  margin-bottom: 27px;
+  margin-bottom: 25px;
 }
 
 
-/* =========================================================
-   FORM FIELDS
-   ========================================================= */
+/* ---------------------------------------------------------
+   OLD-FASHIONED FORM FIELDS
+   --------------------------------------------------------- */
 
 .field {
   margin:
-    27px
+    23px
     0;
 }
 
@@ -722,17 +553,18 @@ label,
 .legend {
   display: block;
 
-  margin-bottom: 9px;
+  margin-bottom: 8px;
 
   font-size: 15px;
   font-weight: 700;
 
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+textarea {
   appearance: none;
 
   display: block;
@@ -740,7 +572,7 @@ input[type="number"] {
   width: 100%;
 
   padding:
-    9px
+    8px
     4px
     7px;
 
@@ -769,74 +601,36 @@ input[type="number"] {
 
 
 input[type="text"]:focus,
-input[type="number"]:focus {
-  border-bottom-width: 2px;
+input[type="number"]:focus,
+textarea:focus {
+  border-bottom-width:
+    2px;
 }
 
-
-/*
-  Ruled writing fields.
-  The browser still sees a normal textarea, but visually
-  it resembles several lines in a mourning register.
-*/
 
 textarea {
-  appearance: none;
+  min-height: 94px;
 
-  display: block;
+  padding-top: 9px;
 
-  width: 100%;
-  min-height: 112px;
-
-  padding:
-    3px
-    4px
-    0;
-
-  border: 0;
-
-  border-radius: 0;
-
-  outline: none;
+  border:
+    1px solid
+    rgba(25,23,20,.62);
 
   resize: vertical;
-
-  background-color:
-    transparent;
-
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 30px,
-      var(--faint-ink) 30px,
-      var(--faint-ink) 31px
-    );
-
-  background-attachment:
-    local;
-
-  color:
-    var(--ink);
-
-  font:
-    17px/31px
-    Georgia,
-    "Times New Roman",
-    serif;
 }
 
 
-/* =========================================================
+/* ---------------------------------------------------------
    CHECKBOXES
-   ========================================================= */
+   --------------------------------------------------------- */
 
 .checks {
   display: grid;
 
-  gap: 14px;
+  gap: 13px;
 
-  margin-top: 13px;
+  margin-top: 12px;
 }
 
 
@@ -856,8 +650,6 @@ textarea {
 
 .checks input {
   appearance: none;
-
-  position: relative;
 
   width: 17px;
   height: 17px;
@@ -881,38 +673,25 @@ textarea {
 }
 
 
-.checks input:checked::before,
 .checks input:checked::after {
-  content: "";
+  content: "×";
 
-  position: absolute;
+  display: block;
 
-  top: 7px;
-  left: 1px;
+  margin-top: -5px;
 
-  width: 13px;
-  height: 1px;
+  text-align: center;
 
-  background:
-    var(--ink);
+  font:
+    22px/17px
+    Georgia,
+    serif;
 }
 
 
-.checks input:checked::before {
-  transform:
-    rotate(45deg);
-}
-
-
-.checks input:checked::after {
-  transform:
-    rotate(-45deg);
-}
-
-
-/* =========================================================
+/* ---------------------------------------------------------
    SUBMIT
-   ========================================================= */
+   --------------------------------------------------------- */
 
 .submit {
   appearance: none;
@@ -921,10 +700,10 @@ textarea {
 
   width: 100%;
 
-  min-height: 53px;
+  min-height: 52px;
 
   margin:
-    31px
+    29px
     0
     0;
 
@@ -965,13 +744,14 @@ textarea {
 
 .submit:disabled {
   opacity: .45;
+
   cursor: default;
 }
 
 
-/* =========================================================
+/* ---------------------------------------------------------
    CONFIRMATIONS
-   ========================================================= */
+   --------------------------------------------------------- */
 
 .confirm {
   text-align: center;
@@ -982,7 +762,7 @@ textarea {
   margin:
     0
     0
-    22px;
+    20px;
 
   font-size: 17px;
   font-weight: 700;
@@ -998,9 +778,9 @@ textarea {
 
   display: block;
 
-  margin-bottom: 19px;
+  margin-bottom: 17px;
 
-  font-size: 15px;
+  font-size: 16px;
 }
 
 
@@ -1009,7 +789,7 @@ textarea {
 
   min-height: 44px;
 
-  margin-top: 10px;
+  margin-top: 8px;
 
   padding: 8px;
 
@@ -1053,27 +833,27 @@ textarea {
 }
 
 
-/* =========================================================
-   QUIET ENDING
-   ========================================================= */
-
-.finial-space {
-  height: 72px;
-}
-
+/* ---------------------------------------------------------
+   FOOT ORNAMENT
+   --------------------------------------------------------- */
 
 .finial {
+  margin:
+    38px
+    auto
+    1px;
+
   text-align: center;
 
-  font-size: 12px;
+  font-size: 13px;
 
-  letter-spacing: .25em;
+  letter-spacing: .18em;
 }
 
 
-/* =========================================================
+/* ---------------------------------------------------------
    DESKTOP
-   ========================================================= */
+   --------------------------------------------------------- */
 
 @media (min-width: 600px) {
 
@@ -1081,43 +861,33 @@ textarea {
     padding:
       22px
       20px
-      38px;
+      35px;
   }
 
   .inner-frame {
     padding:
       51px
       50px
-      72px;
+      57px;
   }
 
 }
 
 
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
+/* ---------------------------------------------------------
+   SMALL PHONES
+   --------------------------------------------------------- */
 
 @media (max-width: 360px) {
 
   .inner-frame {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 13px;
+    padding-right: 13px;
   }
 
   .attention {
-    font-size: 8.3px;
+    font-size: 8.5px;
     letter-spacing: .14em;
-  }
-
-  h1 {
-    font-size: 25px;
-    letter-spacing: .015em;
-  }
-
-  .memorial-name {
-    font-size: 14px;
-    letter-spacing: .075em;
   }
 
   .choices {
@@ -1135,6 +905,7 @@ textarea {
 <main class="notice">
 
 <div class="outer-frame">
+
 <div class="inner-frame">
 
 <div class="corner tl"></div>
@@ -1150,17 +921,10 @@ YOUR ATTENTION TO THE ENTIRETY OF THIS NOTICE IS REQUESTED
 </div>
 
 
-<div class="mourning-emblem" aria-hidden="true">
-
-  <div class="branch left"></div>
-  <div class="branch right"></div>
-
-  <div class="urn-lid"></div>
-  <div class="urn-neck"></div>
-  <div class="urn-body"></div>
-  <div class="urn-foot"></div>
-  <div class="urn-base"></div>
-
+<div class="memorial-mark" aria-hidden="true">
+  <div class="top">— • —</div>
+  <div class="middle">❦</div>
+  <div class="bottom">•</div>
 </div>
 
 
@@ -1170,7 +934,8 @@ In Remembrance of
 
 
 <h1>
-ANOTHER ORDINARY DAY
+ANOTHER<br>
+ORDINARY DAY
 </h1>
 
 
@@ -1183,13 +948,8 @@ FRIDAY, OCTOBER 30, 2026<br>
 <p class="intro">
 
 Friends and acquaintances are invited to gather in remembrance of
-
-<span class="memorial-name">
-ANOTHER ORDINARY DAY
-</span>
-
-whose quiet passing has left us with considerably fewer ordinary days
-than we once imagined we had.
+<strong>Another Ordinary Day</strong>, whose quiet passing has left us
+with considerably fewer ordinary days than we once imagined we had.
 
 </p>
 
@@ -1211,29 +971,29 @@ Regarding the Evening
 
 <p>
 
-The observances will begin promptly at
-<span class="important">7:30 p.m.</span>
-with the Wake for Another Ordinary Day and continue until
-<span class="important">10:45 p.m.</span>
+The observances will begin
+<strong>promptly at 7:30 p.m.</strong>
+with the
+<strong>Wake for Another Ordinary Day</strong>
+and continue until
+<strong>10:45 p.m.</strong>
 
 </p>
 
 <p>
 
-For a while, we will observe the customs of mourning:
-quiet conversation, food and drink, music, remembrance,
-and a few words for the deceased. Guests will have an
-opportunity, should they wish, to offer a remembrance of
-Another Ordinary Day.
+For a while, we will observe the customs of mourning: quiet conversation,
+food and drink, music, remembrance, and a few words for the deceased.
+Guests will have an opportunity, should they wish, to offer a remembrance
+of <strong>Another Ordinary Day</strong>.
 
 </p>
 
 <p>
 
-Then, as the wake draws to a close, the period of formal
-mourning will come to an end. The evening will move outdoors,
-where what began as a wake will become
-<em>a celebration of the days we still have.</em>
+Then, as the wake draws to a close, the period of formal mourning will
+come to an end. The evening will move outdoors, where what began as a
+wake will become <strong>a celebration of the days we still have</strong>.
 
 </p>
 
@@ -1249,9 +1009,7 @@ Attire
 </h2>
 
 <p>
-<span class="important">
-After Mourning attire is requested.
-</span>
+<strong>After Mourning attire is requested.</strong>
 </p>
 
 <p>
@@ -1271,18 +1029,18 @@ Arrival
 
 <p>
 Guests are asked to arrive at
-<span class="important">7:30 p.m.</span>
+<strong>7:30 p.m.</strong>
 </p>
 
-<p class="arrival-command">
-Not before. Not after.
+<p>
+<strong>Not before. Not after.</strong>
 </p>
 
 <p>
 
-Friends and family are welcome to accompany you.
-There is no need for an exact accounting, but a general
-headcount will help us make suitable provisions for the living.
+Friends and family are welcome to accompany you. There is no need for an
+exact accounting, but a general headcount will help us make suitable
+provisions for the living.
 
 </p>
 
@@ -1299,23 +1057,25 @@ For the Bereaved
 
 <p>
 
-In keeping with the customs of a wake, those attending are
-invited to bring something to share:
+In keeping with the customs of a wake, those attending are invited to
+bring something to share:
 
 </p>
 
 <p class="offer">
 
+<strong>
 Food or a casserole<br>
 Non-alcoholic drinks<br>
 Alcoholic drinks
+</strong>
 
 </p>
 
 <p>
 
-There will be an opportunity to indicate what you intend
-to bring when you RSVP.
+There will be an opportunity to indicate what you intend to bring when
+you RSVP.
 
 </p>
 
@@ -1333,26 +1093,23 @@ For the Deceased
 <p>
 
 We also ask every mourner to bring
-<span class="important">
-one ordinary object from an ordinary day.
-</span>
+<strong>one ordinary object from an ordinary day</strong>.
 
 </p>
 
 <p>
 
-<span class="important">
+<strong>
 Nothing valuable.<br>
 Nothing extraordinary.
-</span>
+</strong>
 
 </p>
 
 <p>
 
-A receipt. A grocery list. A coffee mug. A pencil.
-A button. A photograph. A ticket stub.
-A note left on the refrigerator.
+A receipt. A grocery list. A coffee mug. A pencil. A button.
+A photograph. A ticket stub. A note left on the refrigerator.
 
 </p>
 
@@ -1371,10 +1128,13 @@ These objects will be placed with the deceased.
 </section>
 
 
-<!-- THE AFTERLIFE NOW COMES LAST -->
+<!-- =====================================================
+     THE AFTERLIFE
+     Moved here, immediately before the RSVP.
+     ===================================================== -->
 
 
-<section class="center">
+<section>
 
 <div class="section-mark"></div>
 
@@ -1385,16 +1145,16 @@ The Afterlife
 <p>
 
 There will be an optional afterparty screening of
-<em>Yellow Submarine</em>, with popcorn, snacks, and cozy blankets,
+<em>Yellow Submarine</em>, with
+<strong>popcorn, snacks, and cozy blankets</strong>,
 from
-<span class="important">11:00 p.m. to 12:30 a.m.</span>
+<strong>11:00 p.m. to 12:30 a.m.</strong>
 
 </p>
 
 <p>
 
-If needed, there will also be soft places to lay your head
-until morning.
+If needed, there will also be soft places to lay your head until morning.
 
 </p>
 
@@ -1423,9 +1183,8 @@ until morning.
 Will You Be Attending the Wake?
 </div>
 
-
 <p class="response-note">
-AN RSVP, WHETHER ATTENDING OR NOT, IS KINDLY REQUESTED.
+The favor of a reply, whether attending or not, is kindly requested.
 </p>
 
 
@@ -1455,7 +1214,9 @@ NO
 </div>
 
 
-<!-- YES -->
+<!-- =====================================================
+     YES FORM
+     ===================================================== -->
 
 
 <form
@@ -1510,7 +1271,9 @@ How many mourners will be attending?
 What aspects of Another Ordinary Day do you miss?
 </label>
 
-<textarea id="miss"></textarea>
+<textarea
+  id="miss"
+></textarea>
 
 </div>
 
@@ -1521,7 +1284,9 @@ What aspects of Another Ordinary Day do you miss?
 What would you like to have back?
 </label>
 
-<textarea id="back"></textarea>
+<textarea
+  id="back"
+></textarea>
 
 </div>
 
@@ -1602,9 +1367,7 @@ I haven't decided yet
 <p class="center">
 
 Please remember to bring
-<span class="important">
-one ordinary object from an ordinary day
-</span>
+<strong>one ordinary object from an ordinary day</strong>
 to place with the deceased.
 
 </p>
@@ -1628,7 +1391,9 @@ RECORD MY ATTENDANCE
 </form>
 
 
-<!-- NO -->
+<!-- =====================================================
+     NO FORM
+     ===================================================== -->
 
 
 <form
@@ -1683,7 +1448,9 @@ SEND MY REGRETS
 </form>
 
 
-<!-- YES CONFIRMATION -->
+<!-- =====================================================
+     YES CONFIRMATION
+     ===================================================== -->
 
 
 <div
@@ -1730,7 +1497,9 @@ Change my response
 </div>
 
 
-<!-- NO CONFIRMATION -->
+<!-- =====================================================
+     NO CONFIRMATION
+     ===================================================== -->
 
 
 <div
@@ -1768,8 +1537,6 @@ Change my response
 </section>
 
 
-<div class="finial-space"></div>
-
 <div class="finial" aria-hidden="true">
 — ❦ —
 </div>
@@ -1785,9 +1552,18 @@ Change my response
 
 (function () {
 
+
+/* =========================================================
+   GOOGLE SHEETS RSVP ENDPOINT
+   ========================================================= */
+
 const ENDPOINT =
 "https://script.google.com/macros/s/AKfycbwapF4axD26qRLXmYhQdY4KdtQDk1dcbDNrmmePxCDojgDiDZtJwXDojTkxivsS4mk-6g/exec";
 
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
 const choice =
   document.getElementById("choice");
@@ -1822,6 +1598,10 @@ const yesSubmit =
 const noSubmit =
   document.getElementById("no-submit");
 
+
+/* =========================================================
+   DISPLAY
+   ========================================================= */
 
 function scrollToElement(element) {
 
@@ -1875,6 +1655,10 @@ function returnToChoice() {
 }
 
 
+/* =========================================================
+   SUBMISSION
+   ========================================================= */
+
 async function sendRSVP(data) {
 
   const body =
@@ -1899,6 +1683,10 @@ async function sendRSVP(data) {
 
 }
 
+
+/* =========================================================
+   YES / NO
+   ========================================================= */
 
 yesButton.addEventListener(
   "click",
@@ -1935,6 +1723,10 @@ noButton.addEventListener(
   }
 );
 
+
+/* =========================================================
+   YES SUBMISSION
+   ========================================================= */
 
 yesForm.addEventListener(
   "submit",
@@ -1980,7 +1772,9 @@ yesForm.addEventListener(
           )
         )
         .map(function (item) {
+
           return item.value;
+
         })
         .join(", ");
 
@@ -2088,6 +1882,10 @@ yesForm.addEventListener(
 );
 
 
+/* =========================================================
+   NO SUBMISSION
+   ========================================================= */
+
 noForm.addEventListener(
   "submit",
   async function (event) {
@@ -2187,108 +1985,9 @@ noForm.addEventListener(
 );
 
 
-document
-  .querySelectorAll(".change")
-  .forEach(function (button) {
-
-    button.addEventListener(
-      "click",
-      returnToChoice
-    );
-
-  });
-
-
-})();
-
-</script>
-
-</body>
-</html>2160
-2161
-2162
-2163
-2164
-2165
-2166
-2167
-2168
-2169
-2170
-2171
-2172
-2173
-2174
-2175
-2176
-2177
-2178
-2179
-2180
-2181
-2182
-2183
-2184
-2185
-2186
-2187
-2188
-2189
-2190
-2191
-2192
-2193
-2194
-2195
-2196
-2197
-2198
-2199
-2200
-2201
-2202
-2203
-2204
-2205
-2206
-2207
-      noForm
-        .classList
-        .remove("active");
-
-
-      noConfirm
-        .classList
-        .add("active");
-
-
-      scrollToElement(
-        noConfirm
-      );
-
-
-    } catch (error) {
-
-
-      noError.textContent =
-        "Your regrets could not be recorded. Please try again.";
-
-
-    } finally {
-
-
-      noSubmit.disabled =
-        false;
-
-
-      noSubmit.textContent =
-        "SEND MY REGRETS";
-
-    }
-
-  }
-);
-
+/* =========================================================
+   CHANGE RESPONSE
+   ========================================================= */
 
 document
   .querySelectorAll(".change")
@@ -2308,4 +2007,3 @@ document
 
 </body>
 </html>
-Use Control + Shift + m to toggle the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
