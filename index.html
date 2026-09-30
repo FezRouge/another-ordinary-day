@@ -79,16 +79,10 @@ body {
     max(24px, env(safe-area-inset-bottom));
 }
 
-
-/* Outside mourning rule */
-
 .outer-frame {
   border: 2px solid var(--ink);
   padding: 5px;
 }
-
-
-/* Inside mourning rule */
 
 .inner-frame {
   position: relative;
@@ -186,7 +180,6 @@ body {
   line-height: 1;
 }
 
-
 .memorial-mark .top {
   font-size: 15px;
   letter-spacing: .20em;
@@ -218,6 +211,10 @@ body {
 }
 
 
+/*
+   Reduced approximately 25% from the previous title size.
+*/
+
 h1 {
   margin:
     7px
@@ -227,7 +224,7 @@ h1 {
   text-align: center;
 
   font-size:
-    clamp(35px, 10vw, 54px);
+    clamp(26px, 7.5vw, 41px);
 
   line-height: .96;
 
@@ -265,6 +262,28 @@ h1 {
   font-style: italic;
 
   line-height: 1.68;
+}
+
+
+/*
+   The deceased's name is given its own line
+   within the opening notice.
+*/
+
+.intro-name {
+  display: block;
+
+  margin:
+    12px
+    auto
+    10px;
+
+  font-style: normal;
+  font-weight: 700;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
 }
 
 
@@ -306,9 +325,6 @@ h1 {
 
   transform: translateY(-1px);
 }
-
-
-/* Major division */
 
 .ornament.major {
   margin-top: 31px;
@@ -375,8 +391,6 @@ p {
 }
 
 
-/* Small decorative heading rule */
-
 .section-mark {
   width: 42px;
 
@@ -431,8 +445,6 @@ p {
   line-height: 1.55;
 }
 
-
-/* YES / NO */
 
 .choices {
   display: grid;
@@ -539,7 +551,7 @@ p {
 
 
 /* ---------------------------------------------------------
-   OLD-FASHIONED FORM FIELDS
+   FORM FIELDS
    --------------------------------------------------------- */
 
 .field {
@@ -947,9 +959,14 @@ FRIDAY, OCTOBER 30, 2026<br>
 
 <p class="intro">
 
-Friends and acquaintances are invited to gather in remembrance of
-<strong>Another Ordinary Day</strong>, whose quiet passing has left us
-with considerably fewer ordinary days than we once imagined we had.
+Friends and acquaintances are invited to gather and remember
+
+<strong class="intro-name">
+ANOTHER ORDINARY DAY
+</strong>
+
+whose quiet passing has left us with considerably fewer ordinary days
+than we once imagined we had.
 
 </p>
 
@@ -1130,7 +1147,6 @@ These objects will be placed with the deceased.
 
 <!-- =====================================================
      THE AFTERLIFE
-     Moved here, immediately before the RSVP.
      ===================================================== -->
 
 
