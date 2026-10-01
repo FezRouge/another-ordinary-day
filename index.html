@@ -1278,6 +1278,7 @@ How many mourners will be attending?
 
 </div>
 
+
 <div class="field">
 
 <span class="legend">
@@ -1737,20 +1738,6 @@ yesForm.addEventListener(
       );
 
 
-    const miss =
-      document
-        .getElementById("miss")
-        .value
-        .trim();
-
-
-    const back =
-      document
-        .getElementById("back")
-        .value
-        .trim();
-
-
     const bring =
       Array
         .from(
@@ -1820,10 +1807,10 @@ yesForm.addEventListener(
           String(count),
 
         miss:
-          miss,
+          "",
 
         back:
-          back,
+          "",
 
         bring:
           bring
